@@ -1,0 +1,28 @@
+/* Copyright (c) 11.2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U */
+/* Cover page and remarks for the public editions (A4), after the cover of the 4015 memory card description. */
+@page cover { margin: 0; @bottom-left { content: none; } @bottom-right { content: none; } }
+@page front { @bottom-left { content: none; } }
+.cover { page: cover; break-after: page; position: relative; height: 297mm; width: 210mm; }
+.cover .rule-top { position: absolute; left: 14mm; right: 0; top: 18mm; border-top: 1pt solid #000; }
+.cover .rule-left { position: absolute; left: 23mm; top: 28mm; bottom: 0; border-left: 1pt solid #000; }
+.cover .logo { position: absolute; right: 14mm; top: 21mm; height: 21mm; }
+.cover .block { position: absolute; left: 55mm; right: 18mm; top: 100mm; }
+.cover .kind { font: 11pt "TeX Gyre Pagella", "Liberation Serif", serif; font-variant: small-caps; letter-spacing: 0.8pt;
+               border-bottom: 0.8pt solid #000; display: inline-block; padding-bottom: 0.8mm; margin-bottom: 3.5mm; }
+.cover .title { font: 32pt/1.05 "TeX Gyre Pagella", "Liberation Serif", serif; }
+.cover .subtitle { font: 18pt/1.2 "TeX Gyre Pagella", "Liberation Serif", serif; margin-top: 2mm; }
+.cover .copy { margin-top: 32mm; font-size: 10pt; }
+.cover .rights { margin-top: 9mm; font-size: 10pt; line-height: 1.35; width: 90mm; }
+.cover .author { margin-top: 16mm; font: 10pt/1.4 "TeX Gyre Pagella", "Liberation Serif", serif; }
+.cover .author b { font: bold 10.5pt "Liberation Sans", Arial, sans-serif; }
+.cover .version { position: absolute; left: 55mm; bottom: 20mm; font-size: 10pt; }
+.front { page: front; break-after: page; }
+h1.front { page-break-after: auto; font-size: 17pt; border-bottom: 2pt solid #b4b4b4; padding-bottom: 1mm; margin-bottom: 6mm; string-set: doctitle ""; }
+.remark { display: grid; grid-template-columns: 15mm 1fr; column-gap: 7mm; margin-bottom: 5mm; break-inside: avoid; }
+.remark .sign { flex: 0 0 15mm; font: bold 18pt "Liberation Sans", sans-serif; text-align: center; }
+.remark p { margin: 0; }
+nav.toc ul { list-style: none; padding: 0; margin: 0; }
+nav.toc li { margin: 0; }
+nav.toc li.chapter { font-weight: bold; margin-top: 2.5mm; }
+nav.toc li.section { padding-left: 6mm; font-size: 9pt; }
+nav.toc a::after { content: leader(". ") target-counter(attr(href), page); font-weight: normal; }

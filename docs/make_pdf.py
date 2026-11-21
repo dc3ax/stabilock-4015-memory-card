@@ -7,7 +7,7 @@
 
 Needs pandoc and WeasyPrint. The table of contents is generated from the chapter (#)
 and section (##) headings and put where the marker <!-- TOC --> stands; the page numbers
-come from the print style (manual.css).
+come from the print style (doc.css, public.css, memory_card.css; A4).
 """
 import datetime, os, re, subprocess, tempfile
 
@@ -65,7 +65,7 @@ def main():
         tmp = f.name
     try:
         subprocess.run(["pandoc", tmp, "-f", "gfm", "-t", "html5", "-s", "--section-divs",
-                        "--metadata", "title=4015 Memory Card", "-c", "manual.css",
+                        "--metadata", "pagetitle=4015 Memory Card", "-c", "doc.css", "-c", "public.css", "-c", "memory_card.css",
                         "--pdf-engine=weasyprint", "-o", PDF], check=True, cwd=HERE)
     finally:
         os.unlink(tmp)
