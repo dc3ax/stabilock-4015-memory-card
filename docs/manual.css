@@ -109,3 +109,9 @@ blockquote::before { content: "\261E"; position: absolute; left: 0; top: -0.5mm;
 figure { margin: 2mm 0 4mm 0; break-inside: avoid; }
 figure img { display: block; width: 80mm; margin: 0 0 1.5mm 5mm; }
 figcaption { font-style: italic; font-size: 8.2pt; text-align: justify; }
+
+/* A section does not start near the foot of a page: an invisible block of the minimum space
+   needed sits in front of its heading and may not be split, so it moves to the next page when
+   that space is not left; its negative margin gives the height back. (Chapters start on a new
+   right-hand page anyway.) */
+section.level2::before { content: ""; display: block; height: 45mm; margin-bottom: -45mm; break-inside: avoid; }

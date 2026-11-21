@@ -144,7 +144,7 @@ The adapter connects the card socket to a 32-pin DIP plug in the pin order of th
 
 Never leave J1 on Vcc with a 32-pin device type selected: the programmer may drive pin 30 as a signal against the supply.
 
-The build sheet `4015_SRAM_Card_adapter.pdf` lists the same wiring sorted by card contact and by DIP pin. Keep the wires short, check each for continuity and for shorts to its neighbours, and never put the adapter into the programmer turned round: that puts 5 V on the ground side of a card with a cell in it.
+The build sheet `4015_SRAM_Card_adapter_*.PDF` lists the same wiring sorted by card contact and by DIP pin. Keep the wires short, check each for continuity and for shorts to its neighbours, and never put the adapter into the programmer turned round: that puts 5 V on the ground side of a card with a cell in it.
 
 ## Device types
 
