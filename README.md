@@ -41,6 +41,10 @@ The images themselves are original Wavetek software and are not part of this rep
 They are offered for download, with the same SHA-256 sums, at: [link to be added].
 Cards not in `known_cards.csv` are wanted: please get in touch via [dc3ax.de](https://dc3ax.de).
 
+## Support
+
+If these tools saved one of your cards, you can support the work via [Ko-fi](https://ko-fi.com/dc3ax).
+
 ## Licence
 
 Software: MIT (`LICENSE`). Documentation and hardware: CC BY 4.0 (`LICENSE-docs.md`).
