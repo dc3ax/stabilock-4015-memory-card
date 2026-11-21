@@ -1,7 +1,0 @@
-/* Copyright (c) 11.2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U */
-/* Additions for the memory card description, on top of doc.css and public.css (A4):
-   numbered chapters (#) that start on a new page. */
-body { counter-reset: chapter; }
-section.level1 { break-before: page; }
-section.level1 > h1::before { counter-increment: chapter; content: counter(chapter) "\00a0\00a0"; }
-section#revisions > h1::before { content: none; counter-increment: none; }

@@ -13,7 +13,7 @@ need to save them.
 | Path | What |
 |---|---|
 | `docs/memory_card_1.1.PDF` | the full description: card, slot, adapter, format, program files, how the instrument uses a card, known cards |
-| `hardware/4015_SRAM_Card_adapter_1.0.PDF` | build sheet for the adapter from the 34-contact card to a 32-pin DIP plug for a device programmer |
+| `hardware/4015_SRAM_Card_adapter_1.1.PDF` | build sheet for the adapter from the 34-contact card to a 32-pin DIP plug for a device programmer |
 | `tools/cardcheck.py` | checks a card image read with **any** programmer on **any** operating system |
 | `tools/cardprog.py` | reads and writes cards of 32 to 256 KB with an XGecu TL866 / T48 through `minipro` (Linux), with checks and a backup before every write |
 | `tools/mkcard.py` | lists, extracts and builds card images |
