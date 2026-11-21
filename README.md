@@ -38,7 +38,8 @@ With a TL866 under Linux: `python3 tools/cardprog.py read MYCARD.BIN --large`.
 ## Card images
 
 The images themselves are original Wavetek software and are not part of this repository.
-They are offered for download, with the same SHA-256 sums, at: [link to be added].
+They are offered for download, with the same SHA-256 sums, at
+[dc3ax.de › Instruments › STABILOCK 4015 › Memory cards](https://dc3ax.de/en/instruments/stabilock-4015/memory-cards/).
 Cards not in `known_cards.csv` are wanted: please get in touch via [dc3ax.de](https://dc3ax.de).
 
 ## Support
