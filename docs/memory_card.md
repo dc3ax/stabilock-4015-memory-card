@@ -10,7 +10,7 @@
 <div class="rights">Text and drawings are licensed under Creative Commons Attribution 4.0 (CC BY 4.0), the software under the MIT licence. You may copy, change and pass them on if you name the author. The card software described here is © Schlumberger / Wavetek.</div>
 <div class="author"><b>Ulrich Prinz</b><br>OE3UPR / DC3AX / AG1U<br>dc3ax.de</div>
 </div>
-<div class="version">Document Version: 0.1 draft, November 2026</div>
+<div class="version">Version {VERSION}, {VDATE}</div>
 </div>
 
 <div class="front">
@@ -320,3 +320,4 @@ All tools need only Python 3; `cardprog.py` also needs `minipro`.
 | Version | Date | Change |
 |---|---|---|
 | 0.1 | 2026-11 | first draft |
+| 1.0 | 2026-11-21 | First public edition |

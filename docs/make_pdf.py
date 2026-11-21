@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 11.2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U
 # SPDX-License-Identifier: MIT
-"""Build docs/memory_card.pdf from docs/memory_card.md.
+"""Build docs/memory_card_<version>.PDF from docs/memory_card.md.
 
     python3 make_pdf.py
 
@@ -9,11 +9,11 @@ Needs pandoc and WeasyPrint. The table of contents is generated from the chapter
 and section (##) headings and put where the marker <!-- TOC --> stands; the page numbers
 come from the print style (manual.css).
 """
-import os, re, subprocess, tempfile
+import datetime, os, re, subprocess, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, "memory_card.md")
-PDF = os.path.join(HERE, "memory_card.pdf")
+
 
 
 def slug(text):
@@ -43,9 +43,23 @@ def toc(md):
     return '<nav class="toc">\n<ul>\n%s\n</ul>\n</nav>' % "\n".join(items)
 
 
+def version(md):
+    """Newest row of the Revisions table: (version, 'Month YYYY')."""
+    rows = re.findall(r"^\| ([0-9][0-9.]*) \| ([0-9-]+) \|", md, re.M)
+    v, d = rows[-1]
+    y, m = int(d[:4]), int(d[5:7])
+    return v, datetime.date(y, m, 1).strftime("%B %Y")
+
+
 def main():
     md = open(SRC).read()
+    ver, vdate = version(md)
+    md = md.replace("{VERSION}", ver).replace("{VDATE}", vdate)
     md = md.replace("<!-- TOC -->", toc(md))
+    for old in os.listdir(HERE):
+        if re.fullmatch(r"memory_card(_[0-9.]+)?\.(pdf|PDF)", old):
+            os.remove(os.path.join(HERE, old))
+    PDF = os.path.join(HERE, "memory_card_%s.PDF" % ver)
     with tempfile.NamedTemporaryFile("w", suffix=".md", dir=HERE, delete=False) as f:
         f.write(md)
         tmp = f.name

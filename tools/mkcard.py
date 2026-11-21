@@ -14,7 +14,7 @@ Get file: mkcard.py get    CARD.BIN NAME OUT_FILE
 name ending) and the content of PATH from the given sector on. `get` writes the
 sectors of the directory entry called NAME to a file.
 
-Card layout (see docs/memory_card.pdf): 512-byte sectors numbered from 1; sector 1 and 2 are
+Card layout (see docs/memory_card_*.PDF): 512-byte sectors numbered from 1; sector 1 and 2 are
 directory sectors with 16-byte entries; sectors 3-4 are a 1 KB data block; the program
 file starts in sector 5 as an 'H' record followed by an 'F' record.
 """

@@ -8,13 +8,13 @@ Write:  cardprog.py write IMAGE.BIN [--yes]
 Check:  cardprog.py check FILE.BIN
 
 Uses `minipro` (TL866 / T48 programmers) with the device type DS1230Y(RW) and the adapter
-of docs/memory_card.pdf. With another programmer, read the card with its own software and
+of docs/memory_card_*.PDF. With another programmer, read the card with its own software and
 check the file with cardcheck.py.
 
 read   reads the card twice, compares the two reads, tests the address lines and
        lists the directory.
        --large reads with DS1245Y(RW) (128 KB) on a 32-pin adapter that also wires A15 and
-       A16 (docs/memory_card.pdf, "Reading and Writing a Card"). The card size is taken from the
+       A16 (docs/memory_card_*.PDF, "Reading and Writing a Card"). The card size is taken from the
        size code in directory sector 2; the 128 KB read must repeat the card content
        (a 64 KB card ignores A16), and only the card's own size is saved.
 write  first reads the card that is in the adapter. If its content is not one of the
@@ -103,7 +103,7 @@ def describe(img):
     size = mkcard.card_size(img)
     if size and size > len(img):
         print("  WARNING: this is a %d KB card; only the lower %d KB were read, because the 28-pin\n"
-              "  adapter leaves card contact 22 (A15) and up open. See docs/memory_card.pdf."
+              "  adapter leaves card contact 22 (A15) and up open. See docs/memory_card_*.PDF."
               % (size // 1024, len(img) // 1024))
     for k, n, f, c in info["files"]:
         print("  %s %-10s first sector %3d  count %3d" % (k, n, f, c))

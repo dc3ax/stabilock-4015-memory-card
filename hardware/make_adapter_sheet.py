@@ -5,13 +5,20 @@
 
     python3 make_adapter_sheet.py
 
-Writes hardware/4015_SRAM_Card_adapter.pdf with WeasyPrint. The wiring is defined once,
-below; the description is in docs/memory_card.pdf.
+Writes hardware/4015_SRAM_Card_adapter_<version>.PDF with WeasyPrint. The wiring is defined once,
+below; the description is in docs/memory_card_*.PDF.
 """
 import os
+import re
 import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+# Versions of the sheet, newest last: (version, date, change)
+REVISIONS = [
+    ("1.0", "2026-11-21", "First public edition: 32-pin plug with jumper J1 for cards up to 128 KB"),
+]
+VERSION = REVISIONS[-1][0]
 
 # DS1245 / DS1250 DIP-32 pin -> (signal, card contact). A 28-pin part (62256, DS1230, 28C256)
 # sits in pins 3-30. Pin 30 goes through jumper J1 (Vcc for DS1230, open for DS1245, A17 for DS1250).
@@ -69,6 +76,7 @@ td.pl { text-align: right; font-weight: bold; }
 td.pr { text-align: left; font-weight: bold; }
 .small { font-size: 8pt; color: #333; }
 </style></head><body>
+<img src="../docs/logo.svg" alt="DC3AX &ndash; OE3UPR &ndash; AG1U" style="float:right;height:16mm;margin:0 0 4mm 6mm">
 <h1>Schlumberger / Wavetek 4015 &ndash; memory card adapter for a device programmer</h1>
 <p>Connects a Panasonic 34-contact SRAM card (32 KB to 256 KB) to a 32-pin DIP plug in the pin order of the
 32-pin battery-backed RAMs DS1245 (128 KB) and DS1250 (512 KB). A 28-pin part (62256, DS1230, 28C256) sits in
@@ -111,13 +119,27 @@ If DS1230 is not available: 28C256 / AT28C256 with software data protection swit
 <i>known_cards.csv</i> proves adapter and settings in one step.</li>
 <li>Write to a spare card first, read it back, then try it in the instrument.</li>
 </ul>
-<p class=small>Signals marked / are active low. Source and background: docs/memory_card.pdf.
+<p class=small>Signals marked / are active low. Source and background: docs/memory_card_*.PDF.
 Pin assignment from the instrument's schematic (connector ST80), in agreement with an independent pin table for the
 BN-032MC and with the firmware's card access routines. The 28-pin form of this adapter (pins 3&ndash;30) has been
 in use since 2026-10-13; the 32-pin form with J1 read its first 64 KB card on 2026-11-21.</p>
+
+<p class=small><b>Remarks.</b> This sheet is not a product of the maker of the STABILOCK 4015. It was written by a
+radio amateur and is given as it is, without any warranty; build and use the adapter at your own risk. Read and keep
+every card before you write to it. STABILOCK is a registered trademark of its owner.</p>
+
+<h2>Revisions</h2>
+<table>
+<tr><th>Version</th><th>Date</th><th>Change</th></tr>
+""" + "".join("<tr><td>%s</td><td nowrap>%s</td><td>%s</td></tr>" % r for r in REVISIONS) + """
+</table>
+<p class=small>Version """ + VERSION + """ &ndash; &copy; 2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U &ndash; dc3ax.de &ndash; CC BY 4.0</p>
 </body></html>
 """
-pdf = os.path.join(HERE, "4015_SRAM_Card_adapter.pdf")
-subprocess.run(["weasyprint", "-", pdf], input=html.encode("utf-8"), check=True,
+for old in os.listdir(HERE):
+    if re.fullmatch(r"4015_SRAM_Card_adapter(_[0-9.]+)?\.(pdf|PDF)", old):
+        os.remove(os.path.join(HERE, old))
+pdf = os.path.join(HERE, "4015_SRAM_Card_adapter_%s.PDF" % VERSION)
+subprocess.run(["weasyprint", "--base-url", HERE + "/", "-", pdf], input=html.encode("utf-8"), check=True,
                stderr=subprocess.DEVNULL)
 print("written:", pdf)
