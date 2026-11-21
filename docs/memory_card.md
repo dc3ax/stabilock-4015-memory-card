@@ -140,7 +140,7 @@ The adapter connects the card socket to a 32-pin DIP plug in the pin order of th
 |---|---|---|
 | to card contact 1 (Vcc) | DS1230Y (32 KB) | 32 KB, read and write |
 | open | DS1245Y (128 KB) | 64 and 128 KB; a 32 KB card reads as well, four times over |
-| to card contact 21 (A17) | DS1250Y (512 KB) | 256 KB; not tried yet |
+| to card contact 21 (A17) | DS1249Y (256 KB) | 256 KB; not tried yet |
 
 Never leave J1 on Vcc with a 32-pin device type selected: the programmer may drive pin 30 as a signal against the supply.
 
@@ -152,6 +152,7 @@ Select a battery-backed RAM with plain read and write cycles:
 
 - **DS1230Y or DS1230AB** for a 32 KB card (J1 on Vcc).
 - **DS1245Y or DS1245AB** for 64 and 128 KB cards (J1 open).
+- **DS1249Y or DS1249AB** for 256 KB cards (J1 on A17). A DS1250Y (512 KB) works as well; it reads the card twice over.
 - As a fall-back for 32 KB: an **AT28C256** EEPROM, with software data protection switched off, because the unlock sequence would otherwise be written into the card as data.
 - **Never a 27C256** (its pins 1 and 27 are Vpp and A14), and **never a RAM test entry** such as "DS1230Y (TEST)": a test writes patterns over the whole card.
 
@@ -179,7 +180,15 @@ Write only after the card's content has been read and kept. Write to a spare car
 
 ## With the TL866 and minipro under Linux
 
-`cardprog.py` wraps the open-source `minipro` program for the XGecu programmers. `read OUT.BIN --large` reads twice as a DS1245Y, compares, cuts to the card's size and lists the card. `write IMAGE.BIN` reads the card first, saves its content to `backups/` unless it is a known image, writes, reads back and compares. With another programmer or operating system, use the programmer's own software and check the file with `cardcheck.py`.
+`cardprog.py` wraps the open-source `minipro` program for the XGecu programmers. It reads and writes cards of every size the 4015 uses. The option names the J1 setting and the device type:
+
+| Option | J1 | Device type | Cards |
+|---|---|---|---|
+| (none) | on Vcc | DS1230Y | 32 KB |
+| `--large` | open | DS1245Y | 64 and 128 KB; 32 KB as well |
+| `--a17` | on A17 | DS1249Y | 256 KB; not tried on a real card yet |
+
+`read OUT.BIN` reads the card twice, compares, cuts the read to the card's size, tests the address lines and lists the card. `write IMAGE.BIN` takes an image of 32, 64, 128 or 256 KB. It reads the card first and saves its content to `backups/` unless it is one of the images in the current folder or in the list of known cards. It writes the image, repeated where the device is larger than the image, reads the card back and compares. A card that reads back unchanged points to the write-protect switch; a read-back that repeats at a smaller size shows a card smaller than the image. With another programmer or operating system, use the programmer's own software and check the file with `cardcheck.py`.
 
 # The Card Format
 
@@ -310,7 +319,7 @@ Wanted: ETACS in a good copy, other versions of these programs, and any card not
 | `mkcard.py info CARD.BIN` | lists the files and every record of a program file with its sum |
 | `mkcard.py extract CARD.BIN OUT.bin` | writes the Computer code of a program |
 | `mkcard.py build PROG.bin OUT.BIN --name NAME --version VER` | builds a program card image from 68000 code linked for `0x208200` |
-| `cardprog.py read OUT.BIN [--large]` / `write IMAGE.BIN` | reads and writes a card with a TL866 or T48 through `minipro`, with checks and a backup before every write |
+| `cardprog.py read OUT.BIN` / `write IMAGE.BIN` `[--large \| --a17]` | reads and writes cards of 32 to 256 KB with a TL866 or T48 through `minipro`, with checks and a backup before every write |
 | `known_cards.csv` | the known cards with their sums |
 
 All tools need only Python 3; `cardprog.py` also needs `minipro`.
@@ -321,3 +330,4 @@ All tools need only Python 3; `cardprog.py` also needs `minipro`.
 |---|---|---|
 | 0.1 | 2026-11 | first draft |
 | 1.0 | 2026-11-21 | First public edition |
+| 1.1 | 2026-11-21 | `cardprog.py` writes 64, 128 and 256 KB cards as well; DS1249Y for 256 KB |
