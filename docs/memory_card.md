@@ -8,7 +8,7 @@
 <div class="subtitle">The SRAM cards of the STABILOCK 4015:<br>hardware, format, reading and writing</div>
 <div class="copy">© 2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U</div>
 <div class="rights">Text and drawings are licensed under Creative Commons Attribution 4.0 (CC BY 4.0), the software under the MIT licence. You may copy, change and pass them on if you name the author. The card software described here is © Schlumberger / Wavetek.</div>
-<div class="author"><b>Ulrich Prinz</b><br>OE3UPR / DC3AX / AG1U<br>[Contact to be added]</div>
+<div class="author"><b>Ulrich Prinz</b><br>OE3UPR / DC3AX / AG1U<br>dc3ax.de</div>
 </div>
 <div class="version">Document Version: 0.1 draft, November 2026</div>
 </div>
@@ -18,7 +18,7 @@
 <div class="remark"><div class="sign">!</div><p>This description and the tools that come with it are not a product of the maker of the STABILOCK 4015. They were written by a radio amateur from the analysis of the instrument's firmware and of original cards, and are given to other owners as they are, without any warranty. Use them at your own risk.</p></div>
 <div class="remark"><div class="sign">R</div><p>Reading a card does not change it. Writing a card replaces everything on it, including the battery-backed settings it holds. Read and keep every card before you write to it, and try a new image on a spare card first.</p></div>
 <div class="remark"><div class="sign">®</div><p>STABILOCK is a registered trademark of its owner. Trade names are used in this description without special identification; they may be the property of companies or institutes.</p></div>
-<div class="remark"><div class="sign">✎</div><p>Corrections, card images that are not listed here, and reports from other instruments are welcome; see the contact on the title page.</p></div>
+<div class="remark"><div class="sign">✎</div><p>Corrections, card images that are not listed here, and reports from other instruments are welcome; contact via dc3ax.de.</p></div>
 </div>
 
 <div class="front">

@@ -39,7 +39,7 @@ With a TL866 under Linux: `python3 tools/cardprog.py read MYCARD.BIN --large`.
 
 The images themselves are original Wavetek software and are not part of this repository.
 They are offered for download, with the same SHA-256 sums, at: [link to be added].
-Cards not in `known_cards.csv` are wanted: please get in touch.
+Cards not in `known_cards.csv` are wanted: please get in touch via [dc3ax.de](https://dc3ax.de).
 
 ## Licence
 
@@ -47,4 +47,4 @@ Software: MIT (`LICENSE`). Documentation and hardware: CC BY 4.0 (`LICENSE-docs.
 STABILOCK is a registered trademark of its owner. This project is not a product of the
 instrument's maker and comes without any warranty.
 
-© 2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U
+© 2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U – [dc3ax.de](https://dc3ax.de)
