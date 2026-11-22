@@ -201,29 +201,27 @@ def cmd_write(a):
     raw = read_raw(a.mode)
     old = card_from_raw(raw, strict=False)
     p = problems(old)
-    blank = len(set(raw)) == 1
-    if p and not blank:
+    if p:
+        # Never write to a card that does not read properly. All FF in particular is a card
+        # without supply from the programmer (J1 set for another device type, or no contact):
+        # it then runs on its own cell, and the write pulses still reach it and spoil its
+        # content (seen 2026-11-22 with J1 open and the 32 KB device type).
         for line in p:
             print("  FAULT: " + line)
-        raise SystemExit("card does not read properly; nothing written")
-    if blank:
-        print("  all bytes are %02X: probably no contact (an unused card is seldom all %02X)" % (raw[0], raw[0]))
-        print("  (the read-back after writing will show which)")
-    else:
-        describe(old)
-        cap = mkcard.card_size(old) if old[4:12] == SIGNATURE else None
-        if cap and cap < len(new):
-            print("  WARNING: the card says it holds %d KB; the image needs %d KB" % (cap // 1024, len(new) // 1024))
-        elif cap and cap > len(new):
-            print("  NOTE: a %d KB card; the %d KB image fills it with copies, and its size code\n"
-                  "  makes the instrument treat the card as %d KB" % (cap // 1024, len(new) // 1024, len(new) // 1024))
+        raise SystemExit("card does not read properly; nothing written. Check the card, the adapter\n"
+                         "and that J1 and the option agree (none: J1 on Vcc; --large: J1 open)")
+    describe(old)
+    cap = mkcard.card_size(old) if old[4:12] == SIGNATURE else None
+    if cap and cap < len(new):
+        print("  WARNING: the card says it holds %d KB; the image needs %d KB" % (cap // 1024, len(new) // 1024))
+    elif cap and cap > len(new):
+        print("  NOTE: a %d KB card; the %d KB image fills it with copies, and its size code\n"
+              "  makes the instrument treat the card as %d KB" % (cap // 1024, len(new) // 1024, len(new) // 1024))
     if old == new:
         print("the card already holds this image; nothing to do")
         return
-    name = None if blank else known_name(old)
-    if blank:
-        pass
-    elif name:
+    name = known_name(old)
+    if name:
         print("  content is the same as %s, so nothing is lost" % name)
     else:
         os.makedirs(BACKUPS, exist_ok=True)
@@ -243,7 +241,7 @@ def cmd_write(a):
         print("FAULT: %d bytes differ after writing, first at 0x%05X (wrote %02X, reads %02X)"
               % (len(diff), diff[0], image[diff[0]], back[diff[0]]))
         if back == raw:
-            print("the card is unchanged: write-protect switch on, or no contact")
+            print("the card is unchanged: write-protect switch on?")
         elif period(back) < len(new):
             print("the read-back repeats every %d KB: the card is smaller than the image"
                   % (period(back) // 1024))
