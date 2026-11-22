@@ -12,7 +12,7 @@ need to save them.
 
 | Path | What |
 |---|---|
-| `docs/memory_card_1.1.PDF` | the full description: card, slot, adapter, format, program files, how the instrument uses a card, known cards |
+| `docs/memory_card_1.2.PDF` | the full description: card, slot, adapter, format, program files, how the instrument uses a card, known cards |
 | `hardware/4015_SRAM_Card_adapter_1.1.PDF` | build sheet for the adapter from the 34-contact card to a 32-pin DIP plug for a device programmer |
 | `tools/cardcheck.py` | checks a card image read with **any** programmer on **any** operating system |
 | `tools/cardprog.py` | reads and writes cards of 32 to 256 KB with an XGecu TL866 / T48 through `minipro` (Linux), with checks and a backup before every write |
@@ -48,7 +48,7 @@ If these tools saved one of your cards, you can support the work via [Ko-fi](htt
 
 ## Licence
 
-Software: MIT (`LICENSE`). Documentation and hardware: CC BY 4.0 (`LICENSE-docs.md`).
+Software: GNU General Public License, version 3 or later (GPL-3.0-or-later, `LICENSE`): use, change and pass it on freely; changed versions you pass on stay under the GPL, with their source code. Up to 2026-11-22 the tools were released under MIT; copies obtained then keep that licence. Documentation and hardware: CC BY 4.0 (`LICENSE-docs.md`).
 STABILOCK is a registered trademark of its owner. This project is not a product of the
 instrument's maker and comes without any warranty.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 11.2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Check a STABILOCK 4015 memory card image, whatever programmer it was read with.
 
     cardcheck.py DUMP.BIN [--out CARD.BIN]

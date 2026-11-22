@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 10.2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Build or inspect a Wavetek/Schlumberger 4015 memory card image (program card).
 
 Build:    mkcard.py build  PROGRAM.bin  OUT.BIN  --name "MyProg" --version "0.01"

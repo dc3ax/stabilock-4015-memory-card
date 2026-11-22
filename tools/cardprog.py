@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Copyright (c) 10.2026 Ulrich Prinz, OE3UPR / DC3AX / AG1U
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Read or write a 4015 memory card of any size in the device programmer, with checks.
 
 Read:   cardprog.py read  OUT.BIN  [--large | --a17]
